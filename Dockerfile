@@ -47,4 +47,7 @@ RUN \
 
 ADD ./server.pub /etc/telegram-cli/server.pub
 
-ENTRYPOINT /usr/bin/telegram-cli
+# Add user for telegram -d mode
+RUN useradd -ms /bin/false telegramd
+
+ENTRYPOINT /usr/bin/telegram-cli -k /etc/telegram-cli/server.pub
