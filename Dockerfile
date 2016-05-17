@@ -1,4 +1,19 @@
-FROM pataquets/ubuntu:trusty
+FROM debian:jessie
+
+RUN apt-get update && \
+    apt-get upgrade -y
+
+# Locales setup
+## Install locales
+RUN apt-get install -y locales
+
+## Configure new locales
+RUN localedef en_US.UTF-8 -i en_US -f UTF-8 && \
+    localedef ru_RU.UTF-8 -i ru_RU -f UTF-8
+
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 RUN \
   apt-get update && \
